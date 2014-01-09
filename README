@@ -1,0 +1,36 @@
+<wiki:comment>
+  Copyright 2013 Simeon Malchev
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+</wiki:comment>
+
+<font size="3" color="#660099"><b>Vibur DBCP Hibernate4 Integration</b></font>
+
+Latest version from maven central is [#Maven_Dependency_and_How_to_Build: 1.0.0]. Here is a link to [https://code.google.com/p/vibur-dbcp-hibernate4/source/browse/trunk/CHANGELOG change log].
+
+This project provides Hibernate4 integration for [https://code.google.com/p/vibur-dbcp/ Vibur DBCP], a JDBC connection pool.
+
+<br/>
+==== Maven Dependency and How to Build: ====
+
+{{{
+<dependency>
+  <groupId>org.vibur</groupId>
+  <artifactId>vibur-dbcp-hibernate4</artifactId>
+  <version>1.0.0</version>
+</dependency>
+}}}
+
+Building the sources is simply a matter of executing:
+
+  `mvn clean install`
