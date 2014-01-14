@@ -113,7 +113,7 @@ public class ViburDBCPConnectionProvider implements ConnectionProvider, Configur
             result.setProperty("jdbcUrl", jdbcUrl);
 
         String username = configurationValues.get(Environment.USER);
-        if (driverClassName != null)
+        if (username != null)
             result.setProperty("username", username);
         String password = configurationValues.get(Environment.PASS);
         if (password != null)
