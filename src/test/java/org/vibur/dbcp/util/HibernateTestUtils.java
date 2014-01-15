@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.vibur.dbcp.common;
+package org.vibur.dbcp.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
