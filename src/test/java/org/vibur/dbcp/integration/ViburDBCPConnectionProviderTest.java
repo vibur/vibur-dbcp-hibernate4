@@ -31,7 +31,7 @@ import org.vibur.dbcp.ViburDBCPDataSource;
 import org.vibur.dbcp.cache.StatementKey;
 import org.vibur.dbcp.cache.ValueHolder;
 import org.vibur.dbcp.util.HibernateTestUtils;
-import org.vibur.dbcp.common.HsqldbUtils;
+import org.vibur.dbcp.util.HsqldbUtils;
 import org.vibur.dbcp.model.Actor;
 
 import java.io.IOException;
