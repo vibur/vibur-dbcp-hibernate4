@@ -16,7 +16,7 @@
 
 <font size="3" color="#660099"><b>Vibur DBCP Hibernate4 Integration</b></font>
 
-Latest version from maven central is [#Maven_Dependency_and_How_to_Build: 1.0.0]. Here is a link to [https://code.google.com/p/vibur-dbcp-hibernate4/source/browse/trunk/CHANGELOG change log].
+Latest version from maven central is [#Maven_Dependency_and_How_to_Build: 1.0.0]. Here is a link to [https://code.google.com/p/vibur-dbcp-hibernate4/source/browse/trunk/CHANGELOG changelog].
 
 This project provides Hibernate4 integration for [https://code.google.com/p/vibur-dbcp/ Vibur DBCP], a JDBC connection pool.
 
