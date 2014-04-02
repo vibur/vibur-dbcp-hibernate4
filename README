@@ -14,11 +14,11 @@
   limitations under the License.
 </wiki:comment>
 
-<font size="3" color="#660099"><b>Vibur DBCP Hibernate4 Integration</b></font>
+<font size="3" color="#660099"><b>Vibur DBCP Hibernate 4.3+ Integration</b></font>
 
 Latest version from maven central is [#Maven_dependency_and_how_to_build: 1.0.0]. Here is a link to [https://code.google.com/p/vibur-dbcp-hibernate4/source/browse/trunk/CHANGELOG changelog].
 
-This project provides Hibernate4 integration for [https://code.google.com/p/vibur-dbcp/ Vibur DBCP], a JDBC connection pool.
+This project provides Hibernate 4.3+ integration for [https://code.google.com/p/vibur-dbcp/ Vibur DBCP], a JDBC connection pool.
 
 <br/>
 ==== Maven dependency and how to build: ====

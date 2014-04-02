@@ -18,7 +18,7 @@ package org.vibur.dbcp.integration;
 
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.UnknownUnwrapTypeException;
-import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.service.spi.Configurable;
 import org.hibernate.service.spi.Stoppable;
 import org.vibur.dbcp.ViburDBCPDataSource;

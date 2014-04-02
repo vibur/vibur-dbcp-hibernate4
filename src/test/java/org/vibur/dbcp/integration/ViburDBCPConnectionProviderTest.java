@@ -18,7 +18,7 @@ package org.vibur.dbcp.integration;
 
 import org.hibernate.Session;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
-import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hsqldb.cmdline.SqlToolError;
 import org.junit.BeforeClass;
 import org.junit.Test;

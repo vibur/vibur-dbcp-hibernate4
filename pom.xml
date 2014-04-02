@@ -23,8 +23,8 @@
     <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Vibur DBCP - Hibernate4 Integration</name>
-    <description>Hibernate4 integration for Vibur DBCP.</description>
+    <name>Vibur DBCP - Hibernate 4.3+ Integration</name>
+    <description>Hibernate 4.3+ integration for Vibur DBCP.</description>
     <url>https://code.google.com/p/vibur-dbcp-hibernate4</url>
     <inceptionYear>2013</inceptionYear>
 
@@ -78,7 +78,8 @@
 
         <java.version>1.6</java.version>
         <vibur.version>1.0.0</vibur.version>
-        <hibernate-core.version>4.2.8.Final</hibernate-core.version>
+        <slf4j.version>1.7.2</slf4j.version>
+        <hibernate-core.version>4.3.4.Final</hibernate-core.version>
 
         <junit.version>4.11</junit.version>
         <mockito-all.version>1.9.5</mockito-all.version>
@@ -107,7 +108,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Hibernate4 dependency, optional. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Hibernate 4.3 dependency, optional. -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
