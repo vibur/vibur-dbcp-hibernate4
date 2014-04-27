@@ -105,6 +105,9 @@ public class ViburDBCPConnectionProvider implements ConnectionProvider, Configur
     private Properties transform(Map<String, String> configurationValues) {
         Properties result  = new Properties();
 
+        String driverClassName = configurationValues.get(Environment.DRIVER);
+        if (driverClassName != null)
+            result.setProperty("driverClassName", driverClassName);
         String jdbcUrl = configurationValues.get(Environment.URL);
         if (jdbcUrl != null)
             result.setProperty("jdbcUrl", jdbcUrl);
