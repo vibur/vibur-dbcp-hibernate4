@@ -28,13 +28,14 @@ import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.vibur.dbcp.ViburDBCPDataSource;
-import org.vibur.dbcp.cache.StatementKey;
-import org.vibur.dbcp.cache.ValueHolder;
+import org.vibur.dbcp.cache.MethodDef;
+import org.vibur.dbcp.cache.ReturnVal;
 import org.vibur.dbcp.util.HibernateTestUtils;
 import org.vibur.dbcp.util.HsqldbUtils;
 import org.vibur.dbcp.model.Actor;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
@@ -56,7 +57,7 @@ import static org.mockito.Mockito.mock;
 public class ViburDBCPConnectionProviderTest {
 
     @BeforeClass
-    public static void deployDatabaseSchemaAndData() throws IOException, SqlToolError {
+    public static void deployDatabaseSchemaAndData() throws IOException, SqlToolError, SQLException {
         Properties properties = ((SessionFactoryImplementor)
             HibernateTestUtils.getSessionFactoryWithStmtCache()).getProperties();
         HsqldbUtils.deployDatabaseSchemaAndData(properties.getProperty("hibernate.connection.url"),
@@ -65,7 +66,7 @@ public class ViburDBCPConnectionProviderTest {
     }
 
     @Captor
-    private ArgumentCaptor<StatementKey> key1, key2;
+    private ArgumentCaptor<MethodDef<Connection>> key1, key2;
 
     @Test
     public void testSimpleSelectStatementNoStatementsCache() throws SQLException {
@@ -86,7 +87,7 @@ public class ViburDBCPConnectionProviderTest {
         ConnectionProvider cp = ((SessionFactoryImplementor) session.getSessionFactory()).getConnectionProvider();
         ViburDBCPDataSource ds = ((ViburDBCPConnectionProvider) cp).getDataSource();
 
-        ConcurrentMap<StatementKey, ValueHolder<Statement>> mockedStatementCache =
+        ConcurrentMap<MethodDef<Connection>, ReturnVal<Statement>> mockedStatementCache =
             mock(ConcurrentMap.class, delegatesTo(ds.getStatementCache()));
         ds.setStatementCache(mockedStatementCache);
 
@@ -98,12 +99,12 @@ public class ViburDBCPConnectionProviderTest {
 
         InOrder inOrder = inOrder(mockedStatementCache);
         inOrder.verify(mockedStatementCache).get(key1.capture());
-        inOrder.verify(mockedStatementCache).putIfAbsent(same(key1.getValue()), any(ValueHolder.class));
+        inOrder.verify(mockedStatementCache).putIfAbsent(same(key1.getValue()), any(ReturnVal.class));
         inOrder.verify(mockedStatementCache).get(key2.capture());
 
         assertEquals(key1.getValue(), key2.getValue());
         assertEquals("prepareStatement", key1.getValue().getMethod().getName());
-        ValueHolder<Statement> valueHolder = mockedStatementCache.get(key1.getValue());
+        ReturnVal<Statement> valueHolder = mockedStatementCache.get(key1.getValue());
         assertFalse(valueHolder.inUse().get());
     }
 
