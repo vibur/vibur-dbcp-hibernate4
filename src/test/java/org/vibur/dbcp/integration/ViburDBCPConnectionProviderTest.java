@@ -17,8 +17,8 @@
 package org.vibur.dbcp.integration;
 
 import org.hibernate.Session;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hsqldb.cmdline.SqlToolError;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,9 +30,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.vibur.dbcp.ViburDBCPDataSource;
 import org.vibur.dbcp.cache.MethodDef;
 import org.vibur.dbcp.cache.ReturnVal;
+import org.vibur.dbcp.model.Actor;
 import org.vibur.dbcp.util.HibernateTestUtils;
 import org.vibur.dbcp.util.HsqldbUtils;
-import org.vibur.dbcp.model.Actor;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,15 +41,16 @@ import java.sql.Statement;
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.AdditionalAnswers.delegatesTo;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
+import static org.vibur.dbcp.cache.ReturnVal.AVAILABLE;
 
 /**
- * Simple Hibernate unit/integration test.
+ * Hibernate unit/integration test.
  *
  * @author Simeon Malchev
  */
@@ -67,12 +68,14 @@ public class ViburDBCPConnectionProviderTest {
 
     @Captor
     private ArgumentCaptor<MethodDef<Connection>> key1, key2;
+    @Captor
+    private ArgumentCaptor<ReturnVal<Statement>> val1;
 
     @Test
-    public void testSimpleSelectStatementNoStatementsCache() throws SQLException {
+    public void testSelectStatementNoStatementsCache() throws SQLException {
         Session session = HibernateTestUtils.getSessionFactoryWithoutStmtCache().getCurrentSession();
         try {
-            executeAndVerifySimpleSelect(session);
+            executeAndVerifySelect(session);
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
@@ -81,7 +84,7 @@ public class ViburDBCPConnectionProviderTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testSimpleSelectStatementWithStatementsCache() throws SQLException {
+    public void testSelectStatementWithStatementsCache() throws SQLException {
         Session session = HibernateTestUtils.getSessionFactoryWithStmtCache().openSession();
 
         ConnectionProvider cp = ((SessionFactoryImplementor) session.getSessionFactory()).getConnectionProvider();
@@ -91,26 +94,27 @@ public class ViburDBCPConnectionProviderTest {
             mock(ConcurrentMap.class, delegatesTo(ds.getStatementCache()));
         ds.setStatementCache(mockedStatementCache);
 
-        executeAndVerifySimpleSelectInSession(session);
+        executeAndVerifySelectInSession(session);
         // resources/hibernate-with-stmt-cache.cfg.xml defines pool with 1 connection only, that's why
         // the second session will get and use the same underlying connection.
         session = HibernateTestUtils.getSessionFactoryWithStmtCache().openSession();
-        executeAndVerifySimpleSelectInSession(session);
+        executeAndVerifySelectInSession(session);
 
         InOrder inOrder = inOrder(mockedStatementCache);
         inOrder.verify(mockedStatementCache).get(key1.capture());
-        inOrder.verify(mockedStatementCache).putIfAbsent(same(key1.getValue()), any(ReturnVal.class));
+        inOrder.verify(mockedStatementCache).putIfAbsent(same(key1.getValue()), val1.capture());
         inOrder.verify(mockedStatementCache).get(key2.capture());
 
+        assertEquals(1, mockedStatementCache.size());
+        assertTrue(mockedStatementCache.containsKey(key1.getValue()));
         assertEquals(key1.getValue(), key2.getValue());
         assertEquals("prepareStatement", key1.getValue().getMethod().getName());
-        ReturnVal<Statement> valueHolder = mockedStatementCache.get(key1.getValue());
-        assertFalse(valueHolder.inUse().get());
+        assertTrue(val1.getValue().state().get() == AVAILABLE);
     }
 
-    private void executeAndVerifySimpleSelectInSession(Session session) {
+    private void executeAndVerifySelectInSession(Session session) {
         try {
-            executeAndVerifySimpleSelect(session);
+            executeAndVerifySelect(session);
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
@@ -120,7 +124,7 @@ public class ViburDBCPConnectionProviderTest {
     }
 
     @SuppressWarnings("unchecked")
-    private void executeAndVerifySimpleSelect(Session session) {
+    private void executeAndVerifySelect(Session session) {
         session.beginTransaction();
         List<Actor> list = session.createQuery("from Actor where firstName = ?")
             .setParameter(0, "CHRISTIAN").list();
