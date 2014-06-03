@@ -1,4 +1,4 @@
-Version 1.1.0 (##/06/2014)
+Version 1.1.0 (02/06/2014)
 ==========================
 * Adopting changes introduced in vibur-dbcp 1.1.0.
 * Vibur DBCP - Hibernate 4.3+ Integration is now built and distributed as a valid R4 OSGi bundle.
