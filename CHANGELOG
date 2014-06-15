@@ -1,3 +1,7 @@
+Version 1.1.1 (15/06/2014)
+==========================
+* Catching-up with Vibur DBCP version 1.1.1.
+
 Version 1.1.0 (02/06/2014)
 ==========================
 * Adopting changes introduced in vibur-dbcp 1.1.0.
