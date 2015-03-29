@@ -25,7 +25,7 @@
 
     <name>Vibur DBCP - Hibernate 4.3+ Integration</name>
     <description>Hibernate 4.3+ integration for Vibur DBCP.</description>
-    <url>https://code.google.com/p/vibur-dbcp-hibernate4</url>
+    <url>http://www.vibur.org</url>
     <inceptionYear>2013</inceptionYear>
 
     <licenses>
@@ -43,9 +43,9 @@
     <!--</parent>-->
 
     <scm>
-        <connection>scm:git:https://code.google.com/p/vibur-dbcp-hibernate4/</connection>
-        <developerConnection>scm:git:https://code.google.com/p/vibur-dbcp-hibernate4/</developerConnection>
-        <url>http://code.google.com/p/vibur-dbcp-hibernate4/source/browse</url>
+        <connection>scm:git:https://github.com/vibur/vibur-dbcp-hibernate4.git/</connection>
+        <developerConnection>scm:git:https://github.com/vibur/vibur-dbcp-hibernate4.git/</developerConnection>
+        <url>https://github.com/vibur/vibur-dbcp-hibernate4/tree/master/</url>
       <tag>HEAD</tag>
   </scm>
 
@@ -69,8 +69,8 @@
     </organization>
 
     <issueManagement>
-        <system>code.google.com</system>
-        <url>http://code.google.com/p/vibur-dbcp-hibernate4/issues</url>
+        <system>https://github.com</system>
+        <url>https://github.com/vibur/vibur-dbcp-hibernate4/issues</url>
     </issueManagement>
 
     <properties>
