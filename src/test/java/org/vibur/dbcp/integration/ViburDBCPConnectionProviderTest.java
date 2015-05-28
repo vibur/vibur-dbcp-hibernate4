@@ -29,14 +29,13 @@ import org.mockito.InOrder;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.vibur.dbcp.ViburDBCPDataSource;
 import org.vibur.dbcp.cache.ConnMethodKey;
-import org.vibur.dbcp.cache.ReturnVal;
+import org.vibur.dbcp.cache.StatementVal;
 import org.vibur.dbcp.model.Actor;
 import org.vibur.dbcp.util.HibernateTestUtils;
 import org.vibur.dbcp.util.HsqldbUtils;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
@@ -46,7 +45,7 @@ import static org.mockito.AdditionalAnswers.delegatesTo;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.vibur.dbcp.cache.ReturnVal.AVAILABLE;
+import static org.vibur.dbcp.cache.StatementVal.AVAILABLE;
 
 /**
  * Hibernate unit/integration test.
@@ -68,7 +67,7 @@ public class ViburDBCPConnectionProviderTest {
     @Captor
     private ArgumentCaptor<ConnMethodKey> key1, key2;
     @Captor
-    private ArgumentCaptor<ReturnVal<Statement>> val1;
+    private ArgumentCaptor<StatementVal> val1;
 
     @Test
     public void testSelectStatementNoStatementsCache() throws SQLException {
@@ -89,7 +88,7 @@ public class ViburDBCPConnectionProviderTest {
         ConnectionProvider cp = ((SessionFactoryImplementor) session.getSessionFactory()).getConnectionProvider();
         ViburDBCPDataSource ds = ((ViburDBCPConnectionProvider) cp).getDataSource();
 
-        ConcurrentMap<ConnMethodKey, ReturnVal<Statement>> mockedStatementCache =
+        ConcurrentMap<ConnMethodKey, StatementVal> mockedStatementCache =
             mock(ConcurrentMap.class, delegatesTo(ds.getStatementCache()));
         ds.setStatementCache(mockedStatementCache);
 
