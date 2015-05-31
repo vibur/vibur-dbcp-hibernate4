@@ -26,5 +26,6 @@
         <property name="hibernate.vibur.poolInitialSize">2</property>
         <property name="hibernate.vibur.connectionIdleLimitInSeconds">30</property>
         <property name="hibernate.vibur.logQueryExecutionLongerThanMs">1</property>
+        <property name="hibernate.vibur.logLargeResultSet">2</property>
     </session-factory>
 </hibernate-configuration>
