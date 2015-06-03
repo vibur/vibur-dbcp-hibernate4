@@ -186,7 +186,7 @@
                             org.hibernate.service;version="[4.3,5)",
                             org.hibernate.service.spi;version="[4.3,5)",
                             org.hibernate.engine.jdbc.connections.spi;version="[4.3,5)",
-                            org.vibur.dbcp;version="[${version;===;${vibur-dbcp.version}},${version;=+;${vibur-dbcp.version}})"
+                            org.vibur.dbcp;version="[${version;==;${vibur-dbcp.version}},${version;+;${vibur-dbcp.version}})"
                         </Import-Package>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                     </instructions>
