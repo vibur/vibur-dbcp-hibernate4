@@ -31,11 +31,11 @@ import java.util.Properties;
 /**
  * <p>A connection provider for Hibernate org.vibur.dbcp.integration.
  *
- * <p>To use this connection provider set:<br/>
+ * <p>To use this connection provider set:<br>
  * <code>hibernate.connection.provider_class&nbsp;org.vibur.dbcp.org.vibur.dbcp.integration.ViburDBCPConnectionProvider</code>
  *
  * <pre>
- * Supported Hibernate properties:<br/>
+ * Supported Hibernate properties:<br>
  *   hibernate.connection.driver_class
  *   hibernate.connection.url
  *   hibernate.connection.username
