@@ -78,7 +78,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <java.version>1.6</java.version>
-        <vibur-dbcp.version>3.0</vibur-dbcp.version>
+        <vibur-dbcp.version>4.0</vibur-dbcp.version>
         <slf4j.version>1.7.2</slf4j.version>
         <hibernate-core.version>4.3.4.Final</hibernate-core.version>
 
