@@ -41,11 +41,10 @@ import java.util.concurrent.ConcurrentMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.AdditionalAnswers.delegatesTo;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
 import static org.vibur.dbcp.cache.StatementVal.AVAILABLE;
+import static org.vibur.dbcp.util.StatementCacheUtils.mockStatementCache;
 
 /**
  * Hibernate unit/integration test.
@@ -85,12 +84,11 @@ public class ViburDBCPConnectionProviderTest {
     public void testSelectStatementWithStatementsCache() throws SQLException {
         Session session = HibernateTestUtils.getSessionFactoryWithStmtCache().openSession();
 
-        ConnectionProvider cp = ((SessionFactoryImplementor) session.getSessionFactory()).getConnectionProvider();
+        ConnectionProvider cp = ((SessionFactoryImplementor) session.getSessionFactory())
+                .getServiceRegistry().getService(ConnectionProvider.class);
         ViburDBCPDataSource ds = ((ViburDBCPConnectionProvider) cp).getDataSource();
 
-        ConcurrentMap<ConnMethodKey, StatementVal> mockedStatementCache =
-            mock(ConcurrentMap.class, delegatesTo(ds.getStatementCache()));
-        ds.setStatementCache(mockedStatementCache);
+        ConcurrentMap<ConnMethodKey, StatementVal> mockedStatementCache = mockStatementCache(ds);
 
         executeAndVerifySelectInSession(session);
         // resources/hibernate-with-stmt-cache.cfg.xml defines pool with 1 connection only, that's why
