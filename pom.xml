@@ -64,8 +64,8 @@
     </developers>
 
     <organization>
-        <name>Simeon Malchev</name>
-        <url>http://simeonmalchev.com</url>
+        <name>vibur.org</name>
+        <url>http://www.vibur.org</url>
     </organization>
 
     <issueManagement>
@@ -78,7 +78,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <java.version>1.6</java.version>
-        <vibur-dbcp.version>5.0</vibur-dbcp.version>
+        <vibur.osgi.version>5.0</vibur.osgi.version>
         <slf4j.version>1.7.2</slf4j.version>
         <hibernate-core.version>4.3.11.Final</hibernate-core.version>
 
@@ -88,7 +88,7 @@
         <javassist.version>3.12.1.GA</javassist.version>
 
         <maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>
-        <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
+        <maven.bundle.plugin.version>3.0.0</maven.bundle.plugin.version>
         <maven.release.plugin.version>2.4.2</maven.release.plugin.version>
         <maven.javadoc.plugin.version>2.8</maven.javadoc.plugin.version>
         <maven.jar.plugin.version>2.4</maven.jar.plugin.version>
@@ -185,7 +185,7 @@
                             org.hibernate.service;version="[4.3,5)",
                             org.hibernate.service.spi;version="[4.3,5)",
                             org.hibernate.engine.jdbc.connections.spi;version="[4.3,5)",
-                            org.vibur.dbcp;version="[${version;==;${vibur-dbcp.version}},${version;+;${vibur-dbcp.version}})"
+                            org.vibur.dbcp;version="[${version;==;${vibur.osgi.version}},${version;+;${vibur.osgi.version}})"
                         </Import-Package>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                     </instructions>
