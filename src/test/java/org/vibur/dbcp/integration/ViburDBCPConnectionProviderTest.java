@@ -80,7 +80,6 @@ public class ViburDBCPConnectionProviderTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void testSelectStatementWithStatementsCache() throws SQLException {
         Session session = HibernateTestUtils.getSessionFactoryWithStmtCache().openSession();
 
