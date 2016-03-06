@@ -57,7 +57,6 @@ public class ViburDBCPConnectionProvider implements ConnectionProvider, Configur
 
     private ViburDBCPDataSource dataSource = null;
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings("unchecked")
     public void configure(Map configurationValues) {
@@ -65,19 +64,16 @@ public class ViburDBCPConnectionProvider implements ConnectionProvider, Configur
         dataSource.start();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void closeConnection(Connection conn) throws SQLException {
         conn.close();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void stop() {
         if (dataSource != null) {
@@ -86,20 +82,17 @@ public class ViburDBCPConnectionProvider implements ConnectionProvider, Configur
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean supportsAggressiveRelease() {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isUnwrappableAs(Class unwrapType) {
         return ConnectionProvider.class.equals(unwrapType) ||
             ViburDBCPConnectionProvider.class.isAssignableFrom(unwrapType);
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings( {"unchecked"})
     public <T> T unwrap(Class<T> unwrapType) {
