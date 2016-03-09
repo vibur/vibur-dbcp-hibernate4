@@ -125,7 +125,7 @@ public class ViburDBCPConnectionProviderTest {
             .setParameter(0, "CHRISTIAN").list();
         session.getTransaction().commit();
 
-        Set<String> expectedLastNames = new HashSet<String>(Arrays.asList("GABLE", "AKROYD", "NEESON"));
+        Set<String> expectedLastNames = new HashSet<>(Arrays.asList("GABLE", "AKROYD", "NEESON"));
         assertEquals(expectedLastNames.size(), list.size());
         for (Actor actor : list) {
             assertTrue(expectedLastNames.remove(actor.getLastName()));
