@@ -28,8 +28,8 @@ import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.vibur.dbcp.ViburDBCPDataSource;
-import org.vibur.dbcp.cache.ConnMethodKey;
-import org.vibur.dbcp.cache.StatementVal;
+import org.vibur.dbcp.cache.ConnMethod;
+import org.vibur.dbcp.cache.StatementHolder;
 import org.vibur.dbcp.model.Actor;
 import org.vibur.dbcp.util.HibernateTestUtils;
 import org.vibur.dbcp.util.HsqldbUtils;
@@ -43,7 +43,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.inOrder;
-import static org.vibur.dbcp.cache.StatementVal.AVAILABLE;
+import static org.vibur.dbcp.cache.StatementHolder.AVAILABLE;
 import static org.vibur.dbcp.util.StatementCacheUtils.mockStatementCache;
 
 /**
@@ -64,9 +64,9 @@ public class ViburDBCPConnectionProviderTest {
     }
 
     @Captor
-    private ArgumentCaptor<ConnMethodKey> key1, key2;
+    private ArgumentCaptor<ConnMethod> key1, key2;
     @Captor
-    private ArgumentCaptor<StatementVal> val1;
+    private ArgumentCaptor<StatementHolder> val1;
 
     @Test
     public void testSelectStatementNoStatementsCache() throws SQLException {
@@ -87,7 +87,7 @@ public class ViburDBCPConnectionProviderTest {
                 .getServiceRegistry().getService(ConnectionProvider.class);
         ViburDBCPDataSource ds = ((ViburDBCPConnectionProvider) cp).getDataSource();
 
-        ConcurrentMap<ConnMethodKey, StatementVal> mockedStatementCache = mockStatementCache(ds);
+        ConcurrentMap<ConnMethod, StatementHolder> mockedStatementCache = mockStatementCache(ds);
 
         executeAndVerifySelectInSession(session);
         // resources/hibernate-with-stmt-cache.cfg.xml defines pool with 1 connection only, that's why
