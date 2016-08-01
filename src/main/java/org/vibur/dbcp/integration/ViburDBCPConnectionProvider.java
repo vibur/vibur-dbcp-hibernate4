@@ -44,7 +44,7 @@ import java.util.Properties;
  *   hibernate.connection.autocommit
  * </pre>
  *
- * All {@link org.vibur.dbcp.ViburDBCPConfig} properties are also supported via using the
+ * All {@link org.vibur.dbcp.ViburConfig} properties are also supported via using the
  * {@code hibernate.vibur} prefix.
  *
  * @see ConnectionProvider
