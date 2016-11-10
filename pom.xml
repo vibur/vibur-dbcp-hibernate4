@@ -79,6 +79,7 @@
 
         <java.version>1.7</java.version>
         <vibur.osgi.version>12.0</vibur.osgi.version>
+        <concurrentlinkedhashmap-lru.version>1.4.2</concurrentlinkedhashmap-lru.version>
         <slf4j.version>1.7.13</slf4j.version>
         <hibernate-core.version>4.3.11.Final</hibernate-core.version>
 
@@ -102,13 +103,19 @@
             <version>12.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
+            <artifactId>concurrentlinkedhashmap-lru</artifactId>
+            <version>${concurrentlinkedhashmap-lru.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.vibur</groupId>
             <artifactId>vibur-dbcp</artifactId>
             <version>12.0-SNAPSHOT</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
