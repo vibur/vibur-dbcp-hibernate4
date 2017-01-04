@@ -28,7 +28,7 @@ import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.vibur.dbcp.ViburDBCPDataSource;
-import org.vibur.dbcp.cache.ConnMethod;
+import org.vibur.dbcp.cache.StatementMethod;
 import org.vibur.dbcp.cache.StatementHolder;
 import org.vibur.dbcp.model.Actor;
 import org.vibur.dbcp.util.HibernateTestUtils;
@@ -64,7 +64,7 @@ public class ViburDBCPConnectionProviderTest {
     }
 
     @Captor
-    private ArgumentCaptor<ConnMethod> key1, key2;
+    private ArgumentCaptor<StatementMethod> key1, key2;
     @Captor
     private ArgumentCaptor<StatementHolder> val1;
 
@@ -87,7 +87,7 @@ public class ViburDBCPConnectionProviderTest {
                 .getServiceRegistry().getService(ConnectionProvider.class);
         ViburDBCPDataSource ds = ((ViburDBCPConnectionProvider) cp).getDataSource();
 
-        ConcurrentMap<ConnMethod, StatementHolder> mockedStatementCache = mockStatementCache(ds);
+        ConcurrentMap<StatementMethod, StatementHolder> mockedStatementCache = mockStatementCache(ds);
 
         executeAndVerifySelectInSession(session);
         // resources/hibernate-with-stmt-cache.cfg.xml defines pool with 1 connection only, that's why
@@ -103,7 +103,6 @@ public class ViburDBCPConnectionProviderTest {
         assertEquals(1, mockedStatementCache.size());
         assertTrue(mockedStatementCache.containsKey(key1.getValue()));
         assertEquals(key1.getValue(), key2.getValue());
-        assertEquals("prepareStatement", key1.getValue().getMethod().getName());
         assertEquals(AVAILABLE, val1.getValue().state().get());
     }
 
