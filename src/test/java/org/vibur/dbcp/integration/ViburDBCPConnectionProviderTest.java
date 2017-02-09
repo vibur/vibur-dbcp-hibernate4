@@ -28,9 +28,9 @@ import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.vibur.dbcp.ViburDBCPDataSource;
-import org.vibur.dbcp.cache.StatementMethod;
-import org.vibur.dbcp.cache.StatementHolder;
 import org.vibur.dbcp.model.Actor;
+import org.vibur.dbcp.stcache.StatementHolder;
+import org.vibur.dbcp.stcache.StatementMethod;
 import org.vibur.dbcp.util.HibernateTestUtils;
 import org.vibur.dbcp.util.HsqldbUtils;
 
@@ -43,7 +43,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.inOrder;
-import static org.vibur.dbcp.cache.StatementHolder.State.AVAILABLE;
+import static org.vibur.dbcp.stcache.StatementHolder.State.AVAILABLE;
 import static org.vibur.dbcp.util.StatementCacheUtils.mockStatementCache;
 
 /**
